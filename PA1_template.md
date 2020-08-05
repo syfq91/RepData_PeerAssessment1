@@ -1,8 +1,11 @@
 ---
-title: "Reproducible Research in R: Week 2 Assignment"
-author: "syfq91"
-date: "8/5/2020"
-output: html_document
+title: 'Reproducible Research in R: Week 2 Assignment'
+author: "Ken Wood"
+date: "8/4/2020"
+output:
+  html_document: 
+    keep_md: yes
+  pdf_document: default
 ---
 
 ### Loading and preprocessing the data
@@ -30,7 +33,7 @@ df$date <- as.Date(df$date,format="%Y-%m-%d")
 
 ### What is mean total number of steps taken per day?
 
-For this part of the assignment, we can ignore the missing values in the dataset
+For this part of the assignment, we can ignore the missing values in the dataset.
 
 1. Calculate the total number of steps taken per day
 2. If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day
@@ -45,9 +48,9 @@ df1 <- df[complete.cases(df),]
 total_steps_per_day <- aggregate(df1$steps, by=list(df1$date), sum)
 
 # Generate histogram
-png("Histogram of Total Steps Per Day.png")
+# png("Histogram of Total Steps Per Day.png")
 hist(total_steps_per_day$x,breaks=20,col="blue",xlab="Total Steps Per Day",main="Histogram of Total Steps Per Day")
-dev.off()
+# dev.off()
 
 # Calculate and report the mean and median of the total number of steps taken per day
 
@@ -70,9 +73,9 @@ mean_steps <- aggregate(df1$steps, by=list(df1$interval), mean)
 names(mean_steps) <- c("time","steps")
 
 # Plot the line graph
-png("Mean Number of Steps by Time of Day.png")
+# png("Mean Number of Steps by Time of Day.png")
 ggplot(data=mean_steps, aes(x = time, y = steps))+geom_line()+xlab("Time of Day (HHMM)")+ggtitle("Mean Number of Steps by Time of Day")
-dev.off()
+# dev.off()
 
 # Determine time interval when mean number of steps is maximum
 mean_steps[which.max(mean_steps$steps), ]$time
@@ -125,9 +128,9 @@ total_steps_per_day <- aggregate(df1$steps, by=list(df1$date), sum)
 
 # Generate histogram
 
-png("Histogram of Total Steps Per Day with Imputed Values.png")
+# png("Histogram of Total Steps Per Day with Imputed Values.png")
 hist(total_steps_per_day$x,breaks=20,col="blue",xlab="Total Steps Per Day",main="Histogram of Total Steps Per Day")
-dev.off()
+# dev.off()
 
 # Calculate and report the mean and median of the total number of steps taken per day
 
@@ -166,8 +169,11 @@ mean_steps <- mean_steps %>% arrange(Weekday_Weekend, time)
 mean_steps$Weekday_Weekend <- as.factor(mean_steps$Weekday_Weekend)
 
 # Create plots
-png("Mean Number of Steps by Time of Day Weekday Weekend.png")
+# png("Mean Number of Steps by Time of Day Weekday Weekend.png")
 ggplot(mean_steps, aes(x=time, y=steps))+geom_line()+facet_wrap(~Weekday_Weekend,nrow=2)+xlab("Time of Day")+ylab("Mean steps")+ggtitle("Mean Number of Steps by Time of Day")
-dev.off()
+# dev.off()
 
-```.
+```
+
+
+
